@@ -32,12 +32,27 @@ const Home = () => {
           position: 'relative',
           backgroundColor: 'grey.800',
           color: '#fff',
-          mb: 4,
+          mb: 6,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundImage: 'url(https://source.unsplash.com/random/?world,map)',
+          backgroundImage: 'url(https://source.unsplash.com/featured/?world,globe,map)',
+          overflow: 'hidden',
+          borderRadius: 0,
         }}
       >
+        {/* Background pattern overlay */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+            opacity: 0.5,
+          }}
+        />
+        {/* Darkening overlay */}
         <Box
           sx={{
             position: 'absolute',
@@ -45,7 +60,7 @@ const Home = () => {
             bottom: 0,
             right: 0,
             left: 0,
-            backgroundColor: 'rgba(0,0,0,.6)',
+            backgroundColor: 'rgba(0,0,0,.65)',
           }}
         />
         <Grid container>
@@ -53,87 +68,203 @@ const Home = () => {
             <Box
               sx={{
                 position: 'relative',
-                p: { xs: 3, md: 6 },
+                p: { xs: 4, md: 8 },
                 pr: { md: 0 },
-                minHeight: 400,
+                minHeight: 450,
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center'
               }}
             >
-              <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-                WorldExplorer
+              <Box 
+                component="span" 
+                sx={{ 
+                  display: 'inline-block', 
+                  color: 'secondary.light', 
+                  fontWeight: 600, 
+                  mb: 2,
+                  fontSize: '1.1rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: 1,
+                }}>
+                Explore Our Planet
+              </Box>
+              <Typography 
+                component="h1" 
+                variant="h2" 
+                color="inherit" 
+                gutterBottom
+                sx={{ 
+                  fontWeight: 800, 
+                  letterSpacing: '-1px',
+                  fontSize: { xs: '2.5rem', md: '3.5rem' },
+                  textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                  mb: 3,
+                }}
+              >
+                World<span style={{ color: '#3498db' }}>Explorer</span>
               </Typography>
-              <Typography variant="h5" color="inherit" paragraph>
+              <Typography 
+                variant="h5" 
+                color="inherit" 
+                paragraph
+                sx={{ 
+                  fontSize: { xs: '1.1rem', md: '1.25rem' },
+                  lineHeight: 1.6,
+                  mb: 4,
+                  opacity: 0.9,
+                  maxWidth: '90%',
+                }}
+              >
                 Your comprehensive portal for exploring countries around the globe, their cultures, demographics, and more.
               </Typography>
-              <Box sx={{ mt: 4 }}>
+              <Box sx={{ mt: 4, display: 'flex', flexWrap: 'wrap', gap: 2 }}>
                 <Button
                   component={RouterLink}
                   to="/countries"
                   variant="contained"
                   size="large"
-                  sx={{ mr: 2, mb: { xs: 2, sm: 0 } }}
+                  sx={{ 
+                    px: 4, 
+                    py: 1.5,
+                    boxShadow: '0 4px 14px rgba(39, 174, 96, 0.4)',
+                    fontSize: '1rem',
+                    borderRadius: '50px',
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                      transform: 'translateY(-3px)',
+                      boxShadow: '0 10px 20px rgba(39, 174, 96, 0.4)',
+                    },
+                  }}
                   startIcon={<PublicIcon />}
                 >
                   Explore Countries
                 </Button>
-                {!isAuthenticated && (
-                  <Button
-                    component={RouterLink}
-                    to="/register"
-                    variant="outlined"
-                    size="large"
-                    sx={{ color: 'white', borderColor: 'white' }}
-                  >
-                    Join WorldExplorer
-                  </Button>
-                )}
               </Box>
             </Box>
+          </Grid>
+          <Grid item md={6} sx={{ position: 'relative', display: { xs: 'none', md: 'block' } }}>
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                right: '10%',
+                transform: 'translateY(-50%)',
+                width: '400px',
+                height: '400px',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(52,152,219,0.3) 0%, rgba(0,0,0,0) 70%)',
+                animation: 'pulse 3s infinite ease-in-out',
+                '@keyframes pulse': {
+                  '0%': { transform: 'translateY(-50%) scale(1)' },
+                  '50%': { transform: 'translateY(-50%) scale(1.05)' },
+                  '100%': { transform: 'translateY(-50%) scale(1)' },
+                },
+              }}
+            />
           </Grid>
         </Grid>
       </Paper>
 
       {/* Countries Feature Section */}
-      <Container maxWidth="lg" sx={{ my: 6 }}>
-        <Box sx={{ mb: 5, textAlign: 'center' }}>
-          <Typography variant="h4" component="h2" gutterBottom>
+      <Container maxWidth="lg" sx={{ my: 8 }}>
+        <Box sx={{ mb: 6, textAlign: 'center' }}>
+          <Typography 
+            variant="h3" 
+            component="h2" 
+            gutterBottom
+            sx={{ 
+              fontWeight: 700, 
+              color: 'primary.dark',
+              position: 'relative',
+              display: 'inline-block',
+              '&:after': {
+                content: '""',
+                position: 'absolute',
+                width: '60px',
+                height: '4px',
+                bottom: '-12px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                backgroundColor: 'secondary.main',
+                borderRadius: '2px',
+              },
+            }}
+          >
             Explore Countries of the World
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary" sx={{ maxWidth: 800, mx: 'auto' }}>
+          <Typography 
+            variant="subtitle1" 
+            color="text.secondary" 
+            sx={{ 
+              maxWidth: 800, 
+              mx: 'auto', 
+              mt: 4,
+              fontSize: '1.1rem',
+              lineHeight: 1.7,
+            }}
+          >
             Discover detailed information about countries around the world. Browse our comprehensive database, search for specific countries, or explore by geographic regions.
           </Typography>
         </Box>
         
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-              <CardMedia
-                component="img"
-                height="200"
-                image="https://source.unsplash.com/random/?countries"
-                alt="Countries"
-              />
-              <CardContent sx={{ flexGrow: 1 }}>
+            <Card 
+              sx={{ 
+                height: '100%', 
+                display: 'flex', 
+                flexDirection: 'column',
+                overflow: 'hidden',
+              }}
+            >
+              <Box sx={{ position: 'relative', overflow: 'hidden', height: '200px' }}>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image="https://images.pexels.com/photos/1174094/pexels-photo-1174094.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt="Countries"
+                  sx={{
+                    transition: 'transform 0.5s ease',
+                    '&:hover': {
+                      transform: 'scale(1.1)',
+                    },
+                  }}
+                />
+                <Box 
+                  sx={{ 
+                    position: 'absolute', 
+                    bottom: 0, 
+                    width: '100%', 
+                    height: '30%', 
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0))',
+                  }}
+                />
+              </Box>
+              <CardContent sx={{ flexGrow: 1, pt: 3 }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <PublicIcon sx={{ color: 'primary.main', mr: 1, fontSize: 30 }} />
-                  <Typography variant="h5" component="h3">
+                  <PublicIcon sx={{ color: 'primary.main', mr: 1.5, fontSize: 30 }} />
+                  <Typography variant="h5" component="h3" sx={{ fontWeight: 600 }}>
                     Browse All Countries
                   </Typography>
                 </Box>
-                <Typography variant="body2" color="text.secondary">
-                  View a list of all countries with essential information like population, capital, and region.
+                <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+                  View a complete list of all countries with essential information like population, capital, and region.
                 </Typography>
               </CardContent>
               <Divider />
-              <CardActions>
+              <CardActions sx={{ p: 2 }}>
                 <Button 
                   component={RouterLink} 
                   to="/countries" 
-                  size="small" 
+                  size="large" 
                   color="primary"
                   fullWidth
+                  variant="contained"
+                  sx={{
+                    borderRadius: '50px',
+                    py: 1,
+                  }}
                 >
                   View Countries
                 </Button>
@@ -142,32 +273,61 @@ const Home = () => {
           </Grid>
           
           <Grid item xs={12} md={4}>
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-              <CardMedia
-                component="img"
-                height="200"
-                image="https://source.unsplash.com/random/?map"
-                alt="Search"
-              />
-              <CardContent sx={{ flexGrow: 1 }}>
+            <Card 
+              sx={{ 
+                height: '100%', 
+                display: 'flex', 
+                flexDirection: 'column',
+                overflow: 'hidden',
+              }}
+            >
+              <Box sx={{ position: 'relative', overflow: 'hidden', height: '200px' }}>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80"
+                  alt="Search"
+                  sx={{
+                    transition: 'transform 0.5s ease',
+                    '&:hover': {
+                      transform: 'scale(1.1)',
+                    },
+                  }}
+                />
+                <Box 
+                  sx={{ 
+                    position: 'absolute', 
+                    bottom: 0, 
+                    width: '100%', 
+                    height: '30%', 
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0))',
+                  }}
+                />
+              </Box>
+              <CardContent sx={{ flexGrow: 1, pt: 3 }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <SearchIcon sx={{ color: 'primary.main', mr: 1, fontSize: 30 }} />
-                  <Typography variant="h5" component="h3">
+                  <SearchIcon sx={{ color: 'primary.main', mr: 1.5, fontSize: 30 }} />
+                  <Typography variant="h5" component="h3" sx={{ fontWeight: 600 }}>
                     Search Countries
                   </Typography>
                 </Box>
-                <Typography variant="body2" color="text.secondary">
-                  Search for specific countries by name and discover detailed information about them.
+                <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+                  Search for specific countries by name and discover detailed information about them instantly.
                 </Typography>
               </CardContent>
               <Divider />
-              <CardActions>
+              <CardActions sx={{ p: 2 }}>
                 <Button 
                   component={RouterLink} 
                   to="/countries/search" 
-                  size="small" 
+                  size="large" 
                   color="primary"
                   fullWidth
+                  variant="contained"
+                  sx={{
+                    borderRadius: '50px',
+                    py: 1,
+                  }}
                 >
                   Search Now
                 </Button>
@@ -176,32 +336,61 @@ const Home = () => {
           </Grid>
           
           <Grid item xs={12} md={4}>
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-              <CardMedia
-                component="img"
-                height="200"
-                image="https://source.unsplash.com/random/?continent"
-                alt="Regions"
-              />
-              <CardContent sx={{ flexGrow: 1 }}>
+            <Card 
+              sx={{ 
+                height: '100%', 
+                display: 'flex', 
+                flexDirection: 'column',
+                overflow: 'hidden',
+              }}
+            >
+              <Box sx={{ position: 'relative', overflow: 'hidden', height: '200px' }}>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image="https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt="Regions"
+                  sx={{
+                    transition: 'transform 0.5s ease',
+                    '&:hover': {
+                      transform: 'scale(1.1)',
+                    },
+                  }}
+                />
+                <Box 
+                  sx={{ 
+                    position: 'absolute', 
+                    bottom: 0, 
+                    width: '100%', 
+                    height: '30%', 
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0))',
+                  }}
+                />
+              </Box>
+              <CardContent sx={{ flexGrow: 1, pt: 3 }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <ExploreIcon sx={{ color: 'primary.main', mr: 1, fontSize: 30 }} />
-                  <Typography variant="h5" component="h3">
+                  <ExploreIcon sx={{ color: 'primary.main', mr: 1.5, fontSize: 30 }} />
+                  <Typography variant="h5" component="h3" sx={{ fontWeight: 600 }}>
                     Explore by Region
                   </Typography>
                 </Box>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
                   Explore countries by geographic regions such as Africa, Americas, Asia, Europe, and Oceania.
                 </Typography>
               </CardContent>
               <Divider />
-              <CardActions>
+              <CardActions sx={{ p: 2 }}>
                 <Button 
                   component={RouterLink} 
                   to="/countries/regions" 
-                  size="small" 
+                  size="large" 
                   color="primary"
                   fullWidth
+                  variant="contained"
+                  sx={{
+                    borderRadius: '50px',
+                    py: 1,
+                  }}
                 >
                   Explore Regions
                 </Button>
@@ -240,7 +429,7 @@ const Home = () => {
                   Country Flags
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  View high-quality images of national flags from around the world.
+                  View high-quality images of national flags from around the world and learn about their significance.
                 </Typography>
               </CardContent>
             </Card>
@@ -253,7 +442,7 @@ const Home = () => {
                   Language & Culture
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Explore the languages, currencies, and cultural aspects of different nations.
+                  Explore the languages, currencies, and cultural aspects of different nations across the globe.
                 </Typography>
               </CardContent>
             </Card>
@@ -266,7 +455,7 @@ const Home = () => {
                   Geographic Data
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Access detailed geographic information including borders, regions, and capital cities.
+                  Access detailed geographic information including borders, regions, capital cities, and population statistics.
                 </Typography>
               </CardContent>
             </Card>

@@ -23,16 +23,16 @@ function App() {
         <Router>
           <Header />
           <Routes>
-            {/* Main Route */}
+            {/* Home Page */}
             <Route path="/" element={<Home />} />
             
-            {/* Country Routes - Primary Feature */}
+            {/* Countries Features - Main Application */}
             <Route path="/countries" element={<Countries />} />
             <Route path="/countries/:countryCode" element={<CountryDetail />} />
             <Route path="/countries/search" element={<CountrySearch />} />
             <Route path="/countries/regions" element={<RegionExplorer />} />
             
-            {/* Account Routes */}
+            {/* Optional Account Features */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route 

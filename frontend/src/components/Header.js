@@ -62,16 +62,27 @@ const Header = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <PublicIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <PublicIcon 
+            sx={{ 
+              display: { xs: 'none', md: 'flex' }, 
+              mr: 1.5, 
+              fontSize: 32,
+              animation: 'rotate 20s linear infinite',
+              '@keyframes rotate': {
+                '0%': { transform: 'rotate(0deg)' },
+                '100%': { transform: 'rotate(360deg)' }
+              }
+            }} 
+          />
           <Typography
             variant="h6"
             noWrap
             component={RouterLink}
             to="/"
             sx={{
-              mr: 2,
+              mr: 3,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              fontFamily: 'Poppins, sans-serif',
               fontWeight: 700,
               letterSpacing: '.1rem',
               color: 'inherit',
@@ -89,6 +100,11 @@ const Header = () => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
+              sx={{ 
+                '&:hover': { 
+                  background: 'rgba(255,255,255,0.1)',
+                } 
+              }}
             >
               <MenuIcon />
             </IconButton>
@@ -108,6 +124,10 @@ const Header = () => {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: 'block', md: 'none' },
+                '& .MuiPaper-root': { 
+                  borderRadius: 2,
+                  mt: 1.5,
+                },
               }}
             >
               <MenuItem onClick={() => { handleCloseNavMenu(); navigate('/'); }}>
@@ -116,7 +136,7 @@ const Header = () => {
               
               {/* Countries Menu Items for Mobile */}
               <MenuItem onClick={() => { handleCloseNavMenu(); navigate('/countries'); }}>
-                <Typography textAlign="center">Countries</Typography>
+                <Typography textAlign="center">All Countries</Typography>
               </MenuItem>
               <MenuItem onClick={() => { handleCloseNavMenu(); navigate('/countries/search'); }}>
                 <Typography textAlign="center">Search Countries</Typography>
@@ -133,7 +153,18 @@ const Header = () => {
             </Menu>
           </Box>
           
-          <PublicIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <PublicIcon 
+            sx={{ 
+              display: { xs: 'flex', md: 'none' }, 
+              mr: 1,
+              fontSize: 28,
+              animation: 'rotate 20s linear infinite',
+              '@keyframes rotate': {
+                '0%': { transform: 'rotate(0deg)' },
+                '100%': { transform: 'rotate(360deg)' }
+              }
+            }} 
+          />
           <Typography
             variant="h5"
             noWrap
@@ -143,9 +174,9 @@ const Header = () => {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: 'Poppins, sans-serif',
               fontWeight: 700,
-              letterSpacing: '.1rem',
+              letterSpacing: '.05rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
@@ -156,7 +187,29 @@ const Header = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
               onClick={() => navigate('/')}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              sx={{ 
+                my: 2, 
+                mx: 0.5,
+                color: 'white', 
+                display: 'block',
+                fontSize: '1rem',
+                position: 'relative',
+                '&:after': {
+                  content: '""',
+                  position: 'absolute',
+                  width: '0%',
+                  height: '3px',
+                  bottom: '6px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  backgroundColor: 'white',
+                  transition: 'width 0.3s ease',
+                  borderRadius: '3px',
+                },
+                '&:hover:after': {
+                  width: '60%',
+                },
+              }}
             >
               Home
             </Button>
@@ -164,7 +217,30 @@ const Header = () => {
             {/* Countries Dropdown for Desktop */}
             <Button
               onClick={handleOpenCountriesMenu}
-              sx={{ my: 2, color: 'white', display: 'flex', alignItems: 'center' }}
+              sx={{ 
+                my: 2, 
+                mx: 0.5, 
+                color: 'white', 
+                display: 'flex', 
+                alignItems: 'center',
+                fontSize: '1rem',
+                position: 'relative',
+                '&:after': {
+                  content: '""',
+                  position: 'absolute',
+                  width: '0%',
+                  height: '3px',
+                  bottom: '6px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  backgroundColor: 'white',
+                  transition: 'width 0.3s ease',
+                  borderRadius: '3px',
+                },
+                '&:hover:after': {
+                  width: '60%',
+                },
+              }}
               startIcon={<PublicIcon />}
             >
               Countries
@@ -183,17 +259,60 @@ const Header = () => {
               }}
               open={Boolean(anchorElCountries)}
               onClose={handleCloseCountriesMenu}
+              sx={{
+                '& .MuiPaper-root': { 
+                  borderRadius: 2,
+                  mt: 1.5,
+                  boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+                },
+              }}
             >
-              <MenuItem onClick={() => { handleCloseCountriesMenu(); navigate('/countries'); }}>
-                <PublicIcon fontSize="small" sx={{ mr: 1 }} />
+              <MenuItem 
+                onClick={() => { handleCloseCountriesMenu(); navigate('/countries'); }}
+                sx={{
+                  borderRadius: 1,
+                  mx: 0.5,
+                  my: 0.5,
+                  transition: 'all 0.2s ease',
+                  '&:hover': {
+                    backgroundColor: 'rgba(26, 82, 118, 0.08)',
+                    transform: 'translateX(5px)',
+                  }
+                }}
+              >
+                <PublicIcon fontSize="small" sx={{ mr: 1, color: 'primary.main' }} />
                 <Typography>All Countries</Typography>
               </MenuItem>
-              <MenuItem onClick={() => { handleCloseCountriesMenu(); navigate('/countries/search'); }}>
-                <SearchIcon fontSize="small" sx={{ mr: 1 }} />
+              <MenuItem 
+                onClick={() => { handleCloseCountriesMenu(); navigate('/countries/search'); }}
+                sx={{
+                  borderRadius: 1,
+                  mx: 0.5,
+                  my: 0.5,
+                  transition: 'all 0.2s ease',
+                  '&:hover': {
+                    backgroundColor: 'rgba(26, 82, 118, 0.08)',
+                    transform: 'translateX(5px)',
+                  }
+                }}
+              >
+                <SearchIcon fontSize="small" sx={{ mr: 1, color: 'primary.main' }} />
                 <Typography>Search Countries</Typography>
               </MenuItem>
-              <MenuItem onClick={() => { handleCloseCountriesMenu(); navigate('/countries/regions'); }}>
-                <ExploreIcon fontSize="small" sx={{ mr: 1 }} />
+              <MenuItem 
+                onClick={() => { handleCloseCountriesMenu(); navigate('/countries/regions'); }}
+                sx={{
+                  borderRadius: 1,
+                  mx: 0.5,
+                  my: 0.5,
+                  transition: 'all 0.2s ease',
+                  '&:hover': {
+                    backgroundColor: 'rgba(26, 82, 118, 0.08)',
+                    transform: 'translateX(5px)',
+                  }
+                }}
+              >
+                <ExploreIcon fontSize="small" sx={{ mr: 1, color: 'primary.main' }} />
                 <Typography>Explore by Region</Typography>
               </MenuItem>
             </Menu>
@@ -201,7 +320,29 @@ const Header = () => {
             {isAuthenticated && (
               <Button
                 onClick={() => navigate('/dashboard')}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ 
+                  my: 2, 
+                  mx: 0.5, 
+                  color: 'white', 
+                  display: 'block',
+                  fontSize: '1rem',
+                  position: 'relative',
+                  '&:after': {
+                    content: '""',
+                    position: 'absolute',
+                    width: '0%',
+                    height: '3px',
+                    bottom: '6px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    backgroundColor: 'white',
+                    transition: 'width 0.3s ease',
+                    borderRadius: '3px',
+                  },
+                  '&:hover:after': {
+                    width: '60%',
+                  },
+                }}
               >
                 Dashboard
               </Button>
@@ -213,7 +354,7 @@ const Header = () => {
               <>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt={user?.name} src="/static/images/avatar/2.jpg" />
+                    <Avatar alt={user?.name || 'User'} src="/static/images/avatar/default.jpg" />
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -241,21 +382,26 @@ const Header = () => {
                 </Menu>
               </>
             ) : (
-              <Box sx={{ display: 'flex' }}>
-                <Button
-                  component={RouterLink}
-                  to="/login"
-                  sx={{ color: 'white', display: 'block', mr: 1 }}
-                >
-                  Login
-                </Button>
-                <Button
-                  component={RouterLink}
-                  to="/register"
+              <Box sx={{ display: 'flex', gap: 1 }}>
+                <Button 
+                  component={RouterLink} 
+                  to="/countries" 
                   variant="contained"
                   color="secondary"
+                  sx={{ 
+                    borderRadius: '20px',
+                    px: 2.5,
+                    py: 0.7,
+                    fontWeight: 600,
+                    textTransform: 'none',
+                    fontSize: '0.95rem',
+                    boxShadow: 'none',
+                    '&:hover': {
+                      boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                    }
+                  }}
                 >
-                  Register
+                  Explore Now
                 </Button>
               </Box>
             )}
