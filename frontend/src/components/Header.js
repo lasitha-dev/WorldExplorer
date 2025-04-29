@@ -12,14 +12,12 @@ import {
   Avatar,
   Button,
   Tooltip,
-  MenuItem,
-  Link
+  MenuItem
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import PublicIcon from '@mui/icons-material/Public';
 import SearchIcon from '@mui/icons-material/Search';
 import ExploreIcon from '@mui/icons-material/Explore';
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -385,7 +383,19 @@ const Header = () => {
               <Box sx={{ display: 'flex', gap: 1 }}>
                 <Button 
                   component={RouterLink} 
-                  to="/countries" 
+                  to="/login" 
+                  sx={{ 
+                    color: 'white', 
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.08)'
+                    }
+                  }}
+                >
+                  Login
+                </Button>
+                <Button 
+                  component={RouterLink} 
+                  to="/register" 
                   variant="contained"
                   color="secondary"
                   sx={{ 
@@ -401,7 +411,7 @@ const Header = () => {
                     }
                   }}
                 >
-                  Explore Now
+                  Register
                 </Button>
               </Box>
             )}

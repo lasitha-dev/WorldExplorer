@@ -21,7 +21,6 @@ import {
   InputLabel
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { useAuth } from '../context/AuthContext';
 
 // REST Countries API base URL
 const API_URL = 'https://restcountries.com/v3.1';
@@ -35,7 +34,6 @@ const Countries = () => {
   const [error, setError] = useState('');
   
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
   
   // Fetch all countries on component mount
   useEffect(() => {

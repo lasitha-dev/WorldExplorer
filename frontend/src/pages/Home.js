@@ -23,7 +23,7 @@ import MapIcon from '@mui/icons-material/Map';
 
 const Home = () => {
   const { isAuthenticated } = useAuth();
-
+  
   return (
     <Box>
       {/* Hero Section */}
@@ -140,6 +140,30 @@ const Home = () => {
                 >
                   Explore Countries
                 </Button>
+                {!isAuthenticated && (
+                  <Button
+                    component={RouterLink}
+                    to="/register"
+                    variant="outlined"
+                    size="large"
+                    sx={{ 
+                      color: 'white', 
+                      borderColor: 'white',
+                      px: 4, 
+                      py: 1.5,
+                      borderRadius: '50px',
+                      borderWidth: 2,
+                      fontSize: '1rem',
+                      '&:hover': {
+                        borderWidth: 2,
+                        borderColor: 'white',
+                        backgroundColor: 'rgba(255,255,255,0.1)',
+                      },
+                    }}
+                  >
+                    Create Account
+                  </Button>
+                )}
               </Box>
             </Box>
           </Grid>

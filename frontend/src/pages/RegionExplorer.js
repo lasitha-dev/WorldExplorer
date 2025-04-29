@@ -6,7 +6,6 @@ import {
   Typography,
   Box,
   Grid,
-  Paper,
   Card,
   CardContent,
   CardMedia,
@@ -16,7 +15,6 @@ import {
   Button,
   Divider
 } from '@mui/material';
-import ExploreIcon from '@mui/icons-material/Explore';
 import PublicIcon from '@mui/icons-material/Public';
 
 // REST Countries API base URL
