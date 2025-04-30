@@ -7,6 +7,10 @@
 [build.environment]
   NODE_VERSION = "16"
 
+# Site settings (site id will be applied when deployed)
+[site]
+  name = "worldexplorer-app"
+
 # Redirect API requests to serverless functions
 [[redirects]]
   from = "/api/*"

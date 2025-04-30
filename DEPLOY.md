@@ -25,6 +25,11 @@ This guide explains how to deploy your WorldExplorer MERN stack application to N
 4. Configure the build settings:
    - Build command: `cd frontend && npm install && npm run build`
    - Publish directory: `frontend/build`
+   - **Important:** Set the site name to include "WorldExplorer"
+     - Go to "Site settings" after initial deploy
+     - Click "Change site name" 
+     - Enter "worldexplorer" or "world-explorer" (with your preferred prefix/suffix)
+     - Example: "worldexplorer-app.netlify.app" or "your-world-explorer.netlify.app"
 5. Add required environment variables:
    - `MONGO_URI`: Your MongoDB connection string
    - `JWT_SECRET`: A secret key for JWT token generation
@@ -47,6 +52,9 @@ This guide explains how to deploy your WorldExplorer MERN stack application to N
    ```bash
    netlify init
    ```
+   
+   **Important:** When prompted to configure a custom domain, choose a site name that includes "WorldExplorer"
+   Example: "worldexplorer-app" or "my-world-explorer"
 
 4. Deploy to Netlify:
    ```bash
