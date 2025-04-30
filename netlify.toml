@@ -5,11 +5,15 @@
   functions = "netlify/functions"
 
 [build.environment]
-  NODE_VERSION = "16"
+  NODE_VERSION = "18"
 
 # Site settings (site id will be applied when deployed)
 [site]
   name = "worldexplorer-app"
+
+# Plugin to install function dependencies
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
 
 # Redirect API requests to serverless functions
 [[redirects]]
