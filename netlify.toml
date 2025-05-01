@@ -1,6 +1,6 @@
 [build]
   base = "."
-  command = "cd frontend && npm install && npm run build && cd ../netlify/functions && npm install"
+  command = "npm install && cd frontend && npm install && npm run build"
   publish = "frontend/build"
   functions = "netlify/functions"
 
@@ -10,10 +10,6 @@
 # Site settings (site id will be applied when deployed)
 [site]
   name = "worldexplorer-app"
-
-# Plugin to install function dependencies
-[[plugins]]
-  package = "@netlify/plugin-functions-install-core"
 
 # Redirect API requests to serverless functions
 [[redirects]]
