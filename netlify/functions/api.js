@@ -12,6 +12,17 @@ dotenv.config();
 // Create Express app
 const app = express();
 
+// Log all requests
+app.use((req, res, next) => {
+  console.log('Request received:', {
+    path: req.path,
+    method: req.method,
+    body: JSON.stringify(req.body),
+    headers: req.headers
+  });
+  next();
+});
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -19,18 +30,20 @@ app.use(express.json());
 // Debug environment variables
 console.log('Environment variables available:', Object.keys(process.env));
 console.log('MONGO_URI defined:', !!process.env.MONGO_URI);
+console.log('MONGO_URI value:', process.env.MONGO_URI ? process.env.MONGO_URI.substring(0, 20) + '...' : 'undefined');
 console.log('JWT_SECRET defined:', !!process.env.JWT_SECRET);
 console.log('JWT_EXPIRE defined:', !!process.env.JWT_EXPIRE);
 
 // Connect to MongoDB
+console.log('Attempting to connect to MongoDB...');
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
-    console.log('Connected to MongoDB');
+    console.log('Connected to MongoDB successfully');
   })
   .catch((err) => {
     console.error('MongoDB connection error:', err.message);
     // Log more detailed error
-    console.error('MongoDB detailed error:', err);
+    console.error('MongoDB detailed error:', JSON.stringify(err));
   });
 
 // Create User schema and model directly in the function
@@ -110,16 +123,21 @@ const protect = async (req, res, next) => {
 
 // Register user
 app.post('/users/register', async (req, res) => {
+  console.log('Registration endpoint hit with data:', JSON.stringify(req.body));
   try {
     const { name, email, password } = req.body;
+    console.log('Processing registration for:', email);
     
     // Check if user exists
+    console.log('Checking if user exists...');
     const userExists = await User.findOne({ email });
     if (userExists) {
+      console.log('User already exists:', email);
       return res.status(400).json({ message: 'Email already registered' });
     }
     
     // Create user
+    console.log('Creating new user...');
     const user = await User.create({
       name,
       email,
@@ -127,11 +145,14 @@ app.post('/users/register', async (req, res) => {
     });
     
     // Create token
+    console.log('User created, generating token');
     const token = user.getSignedJwtToken();
     
+    console.log('Registration successful for:', email);
     res.status(201).json({ success: true, token });
   } catch (error) {
-    console.error('Registration error:', error);
+    console.error('Registration error:', error.message);
+    console.error('Full error:', JSON.stringify(error));
     res.status(500).json({ message: 'Server error during registration' });
   }
 });
